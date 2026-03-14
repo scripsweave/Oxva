@@ -493,10 +493,8 @@ struct WebView: NSViewRepresentable {
         config.preferences.setValue(true, forKey: "screenCaptureEnabled")
         config.preferences.setValue(true, forKey: "useSystemAppearance")
 
-        // Allow inspector while app is running in DEBUG
-#if DEBUG
+        // Always enable the Web Inspector (accessible via Debug menu)
         config.preferences.setValue(true, forKey: "developerExtrasEnabled")
-#endif
 
         // Edit CSP to allow for 3rd party scripts and stylesheets to be loaded
         config.setValue(

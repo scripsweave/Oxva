@@ -9,6 +9,7 @@ import AppKit
 import Foundation
 import SwiftUI
 import UnixDomainSocket
+import WebKit
 
 class WindowDelegate: NSObject, NSWindowDelegate {
     func windowDidResize(_ notification: Notification) {
@@ -88,6 +89,8 @@ struct DiscordApp: App {
                 }
                 .keyboardShortcut("r", modifiers: .command)
             }
+            ThemeCommands()
+            DebugCommands()
         }
 
         Settings {
@@ -98,4 +101,63 @@ struct DiscordApp: App {
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     let windowDelegate = WindowDelegate()
+}
+
+// MARK: - Theme Menu
+
+struct ThemeCommands: Commands {
+    @AppStorage("customCSS") private var customCSS: String = ""
+
+    var body: some Commands {
+        CommandMenu("Theme") {
+            Button("None") {
+                customCSS = ""
+                applyCSS(customCSS)
+            }
+            Divider()
+            ForEach(availableThemes) { theme in
+                Button {
+                    customCSS = theme.contents
+                    applyCSS(customCSS)
+                } label: {
+                    Label(
+                        theme.name,
+                        systemImage: customCSS == theme.contents ? "checkmark" : ""
+                    )
+                }
+            }
+        }
+    }
+
+    private func applyCSS(_ css: String) {
+        guard let webView = Vars.webViewReference,
+              let jsonData = try? JSONEncoder().encode(css),
+              let jsonString = String(data: jsonData, encoding: .utf8) else { return }
+        webView.evaluateJavaScript(
+            "document.getElementById('voxaCustomStyle').textContent = \(jsonString);"
+        )
+    }
+}
+
+// MARK: - Debug Menu
+
+struct DebugCommands: Commands {
+    var body: some Commands {
+        CommandMenu("Debug") {
+            Button("Open Web Inspector") {
+                guard let webView = Vars.webViewReference else { return }
+                if let inspector = webView.value(forKey: "_inspector") as? NSObject {
+                    inspector.perform(NSSelectorFromString("show"))
+                }
+            }
+            .keyboardShortcut("i", modifiers: [.command, .option])
+
+            Divider()
+
+            Button("Reload Page") {
+                if let webView = Vars.webViewReference { hardReloadWebView(webView: webView) }
+            }
+            .keyboardShortcut("r", modifiers: [.command, .shift])
+        }
+    }
 }

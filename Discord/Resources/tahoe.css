@@ -347,9 +347,10 @@ textarea,
    elements that shouldn't be styled
    ============================================ */
 
-/* Elements nested inside popouts/menus/modals that get
-   accidentally styled as glass panels — flatten them all.
-   Covers card, embed, group, section, container variants. */
+/* Discord's native card/group/section components inside popouts
+   have dark semi-transparent backgrounds that become visible boxes
+   when the parent is glass. Replace with a very subtle tint so they
+   read as sections without heavy boxing. */
 [class*="userPopout"] [class*="card"],
 [class*="userPopout"] [class*="group"],
 [class*="userPopout"] [class*="section"],
@@ -367,8 +368,8 @@ textarea,
 [class*="popup"] [class*="card"],
 [class*="popup"] [class*="group"] {
     backdrop-filter: none !important;
-    background: transparent !important;
-    border: none !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
     box-shadow: none !important;
 }
 
