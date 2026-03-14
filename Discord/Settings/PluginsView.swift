@@ -25,7 +25,7 @@ struct PluginsView: View {
         if pluginsChanged {
             Form {
                 HStack {
-                    Text("Refresh Voxa to Apply Changes")
+                    Text("Refresh Oxva to Apply Changes")
                     Spacer()
                     Button("Refresh") {
                         if let webView = Vars.webViewReference { hardReloadWebView(webView: webView) }

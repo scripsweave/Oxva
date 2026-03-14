@@ -13,7 +13,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D910A0852CF2B6F8005F6119 /* Voxa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Voxa.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D910A0852CF2B6F8005F6119 /* Oxva.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Oxva.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -62,7 +62,7 @@
 		D910A0862CF2B6F8005F6119 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D910A0852CF2B6F8005F6119 /* Voxa.app */,
+				D910A0852CF2B6F8005F6119 /* Oxva.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -92,7 +92,7 @@
 				6A821C242D4EA98B00A3A9E4 /* DiscordRPCBridge */,
 			);
 			productName = Discord;
-			productReference = D910A0852CF2B6F8005F6119 /* Voxa.app */;
+			productReference = D910A0852CF2B6F8005F6119 /* Oxva.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -110,7 +110,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D910A0802CF2B6F8005F6119 /* Build configuration list for PBXProject "Voxa" */;
+			buildConfigurationList = D910A0802CF2B6F8005F6119 /* Build configuration list for PBXProject "Oxva" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -214,7 +214,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = Voxa;
+				PRODUCT_NAME = Oxva;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -274,7 +274,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 15.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = Voxa;
+				PRODUCT_NAME = Oxva;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 			};
@@ -297,7 +297,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = Voxa;
+				INFOPLIST_KEY_CFBundleDisplayName = Oxva;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Need camera access for uploading images";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -312,7 +312,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 15.1;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = lol.peril.voxa;
-				PRODUCT_NAME = Voxa;
+				PRODUCT_NAME = Oxva;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -335,7 +335,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = Voxa;
+				INFOPLIST_KEY_CFBundleDisplayName = Oxva;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Need camera access for uploading images";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -350,7 +350,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 15.1;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = lol.peril.voxa;
-				PRODUCT_NAME = Voxa;
+				PRODUCT_NAME = Oxva;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -359,7 +359,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D910A0802CF2B6F8005F6119 /* Build configuration list for PBXProject "Voxa" */ = {
+		D910A0802CF2B6F8005F6119 /* Build configuration list for PBXProject "Oxva" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D910A0922CF2B6FA005F6119 /* Debug */,

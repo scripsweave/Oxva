@@ -1,8 +1,8 @@
-// ==VoxaPlugin==
+// ==OxvaPlugin==
 // @name: FakeNitro
 // @author: Stossy11
 // @description: Simulates Nitro.
-// ==/VoxaPlugin==
+// ==/OxvaPlugin==
 
 let z;
 let isEnabled = true;  // Flag to control the script's execution

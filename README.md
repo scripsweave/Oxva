@@ -21,7 +21,7 @@ Oxva is a fork of [Voxa](https://github.com/voxa-org/Voxa) by the Voxa contribut
 ```bash
 git clone https://github.com/scripsweave/Oxva.git
 cd Oxva
-open Voxa.xcodeproj
+open Oxva.xcodeproj
 ```
 
 Build and run the `Discord` scheme in Xcode.

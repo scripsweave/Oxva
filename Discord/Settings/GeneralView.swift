@@ -21,14 +21,14 @@ struct GeneralView: View {
                 HStack {
                     Text("Support Us On GitHub")
                     Spacer()
-                    Button("Go To Voxa's GitHub") {
-                        NSWorkspace.shared.open(URL(string: "https://github.com/plyght/Voxa")!)
+                    Button("Go To Oxva's GitHub") {
+                        NSWorkspace.shared.open(URL(string: "https://github.com/scripsweave/Oxva")!)
                     }
                 }
 
                 Toggle(isOn: $fullSystemAccent) {
-                    Text("Voxa matches system accent color")
-                    Text("Modifying this setting will reload Voxa.")
+                    Text("Oxva matches system accent color")
+                    Text("Modifying this setting will reload Oxva.")
                         .foregroundStyle(.placeholder)
                 }
                 .onChange(of: fullSystemAccent) {
@@ -37,7 +37,7 @@ struct GeneralView: View {
 
                 Toggle(isOn: $sidebarDividerSystemAccent) {
                     Text("Sidebar divider matches system accent color")
-                    Text("Modifying this setting will reload Voxa.")
+                    Text("Modifying this setting will reload Oxva.")
                         .foregroundStyle(.placeholder)
                 }
                 .onChange(of: sidebarDividerSystemAccent) {
@@ -50,7 +50,7 @@ struct GeneralView: View {
                     }
                 }, label: {
                     Text("Discord Release Channel")
-                    Text("Modifying this setting will reload Voxa.")
+                    Text("Modifying this setting will reload Oxva.")
                         .foregroundStyle(.placeholder)
                 })
                 .onChange(of: discordReleaseChannelSelection) {

@@ -1,16 +1,16 @@
 <rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
   <channel>
-    <title>Voxa Releases</title>
-    <link>https://github.com/plyght/voxa</link>
+    <title>Oxva Releases</title>
+    <link>https://github.com/scripsweave/Oxva</link>
     <item>
-      <title>Version 0.2</title>
+      <title>Version 0.7</title>
       <sparkle:releaseNotesLink>
-        https://github.com/plyght/voxa/releases/tag/v0.2
+        https://github.com/scripsweave/Oxva/releases/tag/v0.7
       </sparkle:releaseNotesLink>
       <enclosure
-         url="https://github.com/plyght/voxa/releases/download/v0.2/Voxa.dmg"
-         sparkle:version="100"
-         sparkle:shortVersionString="1.0"
+         url="https://github.com/scripsweave/Oxva/releases/download/v0.7/Oxva.dmg"
+         sparkle:version="700"
+         sparkle:shortVersionString="0.7"
          length="12345678"
          type="application/x-apple-diskimage"
          sparkle:dsaSignature="...Signature Goes Here..." />

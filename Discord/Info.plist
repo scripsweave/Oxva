@@ -3,16 +3,16 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleExecutable</key>
-	<string>Voxa</string>
+	<string>Oxva</string>
 	<key>CFBundleName</key>
-	<string>Voxa</string>
+	<string>Oxva</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleTypeIconSystemGenerated</key>
 			<integer>1</integer>
 			<key>CFBundleTypeName</key>
-			<string>Voxa</string>
+			<string>Oxva</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>LSHandlerRank</key>

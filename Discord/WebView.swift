@@ -329,7 +329,7 @@ func loadPluginsAndCSS(webView: WKWebView) {
                     configurable: true,
                 });
 
-                class VoxaNotification extends Original {
+                class OxvaNotification extends Original {
                     constructor(title, options = {}) {
                         const id = crypto.randomUUID().toUpperCase();
                         super(title, options);
@@ -368,7 +368,7 @@ func loadPluginsAndCSS(webView: WKWebView) {
                     }
                 }
 
-                window.Notification = VoxaNotification;
+                window.Notification = OxvaNotification;
 
                 Notification.requestPermission = function (cb) {
                     return new Promise((resolve) => {
