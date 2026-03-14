@@ -1,0 +1,682 @@
+/* ============================================
+   Tahoe — macOS Native Feel + Liquid Glass
+   Combines HIG typography, correct cursors and
+   focus rings with translucent glass surfaces
+   and native -apple-visual-effect on Tahoe.
+   ============================================ */
+
+/* ============================================
+   Design tokens
+   ============================================ */
+
+:root {
+    /* Directional glass borders — light from top-left */
+    --gb-bright: rgba(255, 255, 255, 0.22);
+    --gb-mid:    rgba(255, 255, 255, 0.13);
+    --gb-dim:    rgba(255, 255, 255, 0.05);
+
+    /* Glass backgrounds */
+    --glass-specular: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.16) 0%,
+        rgba(255, 255, 255, 0.06) 45%,
+        rgba(0, 0, 0, 0.04) 100%
+    );
+    --glass-specular-subtle: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.09) 0%,
+        rgba(255, 255, 255, 0.04) 100%
+    );
+
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.28);
+
+    /* Border radii */
+    --r-panel:  16px;
+    --r-button: 100px;
+    --r-input:  14px;
+    --r-item:   10px;
+    --r-card:   14px;
+    --r-modal:  22px;
+    --r-menu:   16px;
+}
+
+/* ============================================
+   Typography — macOS HIG scale
+   ============================================ */
+
+*,
+input,
+textarea,
+button,
+select {
+    font-family: -apple-system, "SF Pro Text", "SF Pro Display",
+                 BlinkMacSystemFont, sans-serif !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+
+code, pre,
+[class*="inline"],
+[class*="codeBlock"],
+[class*="markup"] code {
+    font-family: "SF Mono", ui-monospace, "Cascadia Code",
+                 "Fira Code", Menlo, monospace !important;
+    font-size: 13px !important;
+    font-feature-settings: "liga" 0 !important;
+}
+
+/* Body text / messages — 15px regular */
+[class*="markup"],
+[class*="messageContent"],
+[class*="content"] p {
+    font-size: 15px !important;
+    line-height: 1.47 !important;
+    font-weight: 400 !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* Usernames — 15px semibold */
+[class*="username"],
+[class*="author"] {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* Timestamps — 12px caption */
+[class*="timestamp"] {
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    letter-spacing: 0 !important;
+    opacity: 0.45 !important;
+}
+
+/* Channel / DM names — 15px medium */
+[class*="channelName"],
+[class*="name_"],
+[class*="children_"] {
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* Section headers (CHANNELS, DIRECT MESSAGES) — 11px semibold caps */
+[class*="headerText"],
+[class*="containerHeader"],
+[class*="upperContainer"] span {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.06em !important;
+}
+
+/* Server / channel name in header bar — 15px semibold */
+[class*="title"][class*="header"],
+[class*="headerText"] h3 {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* Modal / sheet titles — 20px semibold (Title3) */
+[class*="modal"] [class*="title"],
+[class*="modal"] h1,
+[class*="modal"] h2 {
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.2 !important;
+}
+
+/* Small labels, badges — 12px medium */
+[class*="label"],
+[class*="badge"],
+[class*="tag"] {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0 !important;
+}
+
+/* Button text — 15px medium */
+[class*="button"] [class*="label"],
+[class*="button"] [class*="content"],
+button {
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* Input fields — 15px regular */
+input,
+textarea,
+[class*="input"] {
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* ============================================
+   Glass surfaces — backdrop-filter fallback
+   Directional borders + specular gradients +
+   inset bevel shadows simulate optical depth.
+   ============================================ */
+
+/* Ambient panels */
+[class*="sidebar"] {
+    backdrop-filter: blur(48px) saturate(200%) brightness(1.08) contrast(0.95) !important;
+    background: var(--glass-specular-subtle) !important;
+    border-right: 1px solid var(--gb-mid) !important;
+    box-shadow:
+        inset -1px 0 0 rgba(255, 255, 255, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
+}
+
+[class*="panels"] {
+    backdrop-filter: blur(40px) saturate(200%) brightness(1.06) !important;
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.07) 0%,
+        rgba(255, 255, 255, 0.03) 100%) !important;
+    border-top: 1px solid var(--gb-bright) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.20) !important;
+}
+
+/* Interactive input */
+[class*="channelTextArea"],
+[class*="textArea"] {
+    backdrop-filter: blur(32px) saturate(180%) brightness(1.10) !important;
+    background: var(--glass-specular) !important;
+    border-top:    1px solid var(--gb-bright) !important;
+    border-left:   1px solid var(--gb-mid) !important;
+    border-right:  1px solid var(--gb-dim) !important;
+    border-bottom: 1px solid var(--gb-dim) !important;
+    border-radius: var(--r-input) !important;
+    box-shadow:
+        var(--glass-shadow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.30),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+        inset 1px 0 0 rgba(255, 255, 255, 0.16) !important;
+}
+
+/* Modal / dialog */
+[class*="modal"],
+[class*="dialog"] {
+    backdrop-filter: blur(64px) saturate(220%) brightness(1.06) !important;
+    background: linear-gradient(
+        145deg,
+        rgba(30, 30, 46, 0.72) 0%,
+        rgba(14, 14, 26, 0.60) 100%) !important;
+    border-top:    1px solid rgba(255, 255, 255, 0.20) !important;
+    border-left:   1px solid rgba(255, 255, 255, 0.14) !important;
+    border-right:  1px solid rgba(255, 255, 255, 0.06) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+    border-radius: var(--r-modal) !important;
+    box-shadow:
+        0 24px 64px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.22),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.15) !important;
+    overflow: hidden !important;
+}
+
+/* Context menu */
+[class*="menu"],
+[class*="contextMenu"] {
+    backdrop-filter: blur(56px) saturate(220%) brightness(1.08) !important;
+    background: linear-gradient(
+        145deg,
+        rgba(36, 36, 54, 0.90) 0%,
+        rgba(22, 22, 34, 0.84) 100%) !important;
+    border-top:    1px solid rgba(255, 255, 255, 0.22) !important;
+    border-left:   1px solid rgba(255, 255, 255, 0.16) !important;
+    border-right:  1px solid rgba(255, 255, 255, 0.05) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+    border-radius: var(--r-menu) !important;
+    box-shadow:
+        0 8px 40px rgba(0, 0, 0, 0.36),
+        inset 0 1px 0 rgba(255, 255, 255, 0.24),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.10) !important;
+    padding: 6px !important;
+}
+
+/* Tooltips — simple and compact, no glass treatment */
+[class*="tooltip"] {
+    background: rgba(24, 24, 36, 0.96) !important;
+    border: 1px solid rgba(255, 255, 255, 0.10) !important;
+    border-radius: 6px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.30) !important;
+    backdrop-filter: none !important;
+}
+
+/* Popouts — larger surfaces, light glass */
+[class*="popout"],
+[class*="popup"] {
+    backdrop-filter: blur(48px) saturate(200%) brightness(1.07) !important;
+    background: linear-gradient(
+        135deg,
+        rgba(28, 28, 44, 0.94) 0%,
+        rgba(18, 18, 28, 0.88) 100%) !important;
+    border-top:    1px solid rgba(255, 255, 255, 0.22) !important;
+    border-left:   1px solid rgba(255, 255, 255, 0.15) !important;
+    border-right:  1px solid rgba(255, 255, 255, 0.06) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+    border-radius: 12px !important;
+    box-shadow:
+        0 6px 28px rgba(0, 0, 0, 0.32),
+        inset 0 1px 0 rgba(255, 255, 255, 0.24) !important;
+}
+
+/* User profile popout */
+[class*="userProfileOuter"],
+[class*="userPopout"] {
+    backdrop-filter: blur(64px) saturate(220%) brightness(1.06) !important;
+    background: linear-gradient(
+        145deg,
+        rgba(26, 26, 42, 0.92) 0%,
+        rgba(15, 15, 26, 0.84) 100%) !important;
+    border-top:    1px solid rgba(255, 255, 255, 0.18) !important;
+    border-left:   1px solid rgba(255, 255, 255, 0.12) !important;
+    border-right:  1px solid rgba(255, 255, 255, 0.05) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+    border-radius: var(--r-modal) !important;
+    box-shadow:
+        0 20px 56px rgba(0, 0, 0, 0.42),
+        inset 0 1px 0 rgba(255, 255, 255, 0.20) !important;
+    overflow: hidden !important;
+}
+
+/* Cards / embeds */
+[class*="card"],
+[class*="embed"],
+[class*="attachment"] {
+    backdrop-filter: blur(20px) brightness(1.05) !important;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(255, 255, 255, 0.03) 100%) !important;
+    border-top:    1px solid rgba(255, 255, 255, 0.16) !important;
+    border-left:   1px solid rgba(255, 255, 255, 0.10) !important;
+    border-right:  1px solid rgba(255, 255, 255, 0.04) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+    border-radius: var(--r-card) !important;
+    box-shadow:
+        0 2px 16px rgba(0, 0, 0, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+}
+
+/* Search bar */
+[class*="searchBar"],
+[class*="search"] > [class*="input"] {
+    backdrop-filter: blur(24px) brightness(1.08) !important;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.11) 0%,
+        rgba(255, 255, 255, 0.05) 100%) !important;
+    border-top:    1px solid rgba(255, 255, 255, 0.20) !important;
+    border-left:   1px solid rgba(255, 255, 255, 0.14) !important;
+    border-right:  1px solid rgba(255, 255, 255, 0.05) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: 12px !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
+}
+
+/* ============================================
+   Overrides — prevent glass leaking into
+   elements that shouldn't be styled
+   ============================================ */
+
+/* Cards inside menus/popouts become individual
+   stacked glass boxes — reset them to transparent */
+[class*="menu"] [class*="card"],
+[class*="contextMenu"] [class*="card"],
+[class*="userPopout"] [class*="card"],
+[class*="userProfileOuter"] [class*="card"],
+[class*="popout"] [class*="card"],
+[class*="popup"] [class*="card"] {
+    backdrop-filter: none !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: var(--r-item) !important;
+}
+
+/* Inner containers inside the bottom panels
+   can pick up background boxes from Discord's
+   own styles; flatten them */
+[class*="panels"] [class*="container"],
+[class*="panels"] [class*="wrapper"],
+[class*="panels"] [class*="bar"] {
+    backdrop-filter: none !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* ============================================
+   NATIVE UPGRADE — -apple-visual-effect
+   Real system glass material on macOS Tahoe.
+   Directional borders + inset bevel stay on
+   top to add edge depth the material lacks.
+   Requires: WKWebView + useSystemAppearance=true
+   ============================================ */
+
+@supports (-apple-visual-effect: -apple-system-glass-material) {
+
+    [class*="sidebar"] {
+        -apple-visual-effect: -apple-system-blur-material-thin !important;
+        backdrop-filter: none !important;
+        background: transparent !important;
+        border-right: 1px solid var(--gb-mid) !important;
+        box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.06) !important;
+    }
+
+    [class*="panels"] {
+        -apple-visual-effect: -apple-system-blur-material-thin !important;
+        backdrop-filter: none !important;
+        background: transparent !important;
+        border-top: 1px solid var(--gb-bright) !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+    }
+
+    [class*="channelTextArea"],
+    [class*="textArea"] {
+        -apple-visual-effect: -apple-system-glass-material !important;
+        backdrop-filter: none !important;
+        background: transparent !important;
+        border-top:    1px solid var(--gb-bright) !important;
+        border-left:   1px solid var(--gb-mid) !important;
+        border-right:  1px solid var(--gb-dim) !important;
+        border-bottom: 1px solid var(--gb-dim) !important;
+        border-radius: var(--r-input) !important;
+        box-shadow:
+            var(--glass-shadow),
+            inset 0 1px 0 rgba(255, 255, 255, 0.26),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.10) !important;
+    }
+
+    [class*="modal"],
+    [class*="dialog"] {
+        -apple-visual-effect: -apple-system-glass-material !important;
+        backdrop-filter: none !important;
+        background: transparent !important;
+        border-top:    1px solid rgba(255, 255, 255, 0.20) !important;
+        border-left:   1px solid rgba(255, 255, 255, 0.14) !important;
+        border-right:  1px solid rgba(255, 255, 255, 0.06) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+        border-radius: var(--r-modal) !important;
+        box-shadow:
+            0 24px 64px rgba(0, 0, 0, 0.40),
+            inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+    }
+
+    [class*="menu"],
+    [class*="contextMenu"] {
+        -apple-visual-effect: -apple-system-glass-material !important;
+        backdrop-filter: none !important;
+        background: transparent !important;
+        border-top:    1px solid rgba(255, 255, 255, 0.22) !important;
+        border-left:   1px solid rgba(255, 255, 255, 0.16) !important;
+        border-right:  1px solid rgba(255, 255, 255, 0.05) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+        border-radius: var(--r-menu) !important;
+        box-shadow:
+            0 8px 40px rgba(0, 0, 0, 0.25),
+            inset 0 1px 0 rgba(255, 255, 255, 0.20) !important;
+        padding: 6px !important;
+    }
+
+    [class*="tooltip"] {
+        -apple-visual-effect: none !important;
+        backdrop-filter: none !important;
+        background: rgba(24, 24, 36, 0.96) !important;
+        border: 1px solid rgba(255, 255, 255, 0.10) !important;
+        border-radius: 6px !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.30) !important;
+    }
+
+    [class*="popout"],
+    [class*="popup"] {
+        -apple-visual-effect: -apple-system-glass-material !important;
+        backdrop-filter: none !important;
+        background: transparent !important;
+        border-top:    1px solid rgba(255, 255, 255, 0.22) !important;
+        border-left:   1px solid rgba(255, 255, 255, 0.15) !important;
+        border-right:  1px solid rgba(255, 255, 255, 0.06) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+        border-radius: 12px !important;
+        box-shadow:
+            0 6px 28px rgba(0, 0, 0, 0.20),
+            inset 0 1px 0 rgba(255, 255, 255, 0.20) !important;
+    }
+
+    [class*="userProfileOuter"],
+    [class*="userPopout"] {
+        -apple-visual-effect: -apple-system-glass-material !important;
+        backdrop-filter: none !important;
+        background: transparent !important;
+        border-top:    1px solid rgba(255, 255, 255, 0.18) !important;
+        border-left:   1px solid rgba(255, 255, 255, 0.12) !important;
+        border-right:  1px solid rgba(255, 255, 255, 0.05) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+        border-radius: var(--r-modal) !important;
+        box-shadow:
+            0 20px 56px rgba(0, 0, 0, 0.30),
+            inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+    }
+
+    [class*="card"],
+    [class*="embed"],
+    [class*="attachment"] {
+        -apple-visual-effect: -apple-system-blur-material-thin !important;
+        backdrop-filter: none !important;
+        background: transparent !important;
+        border-top:    1px solid rgba(255, 255, 255, 0.16) !important;
+        border-left:   1px solid rgba(255, 255, 255, 0.10) !important;
+        border-right:  1px solid rgba(255, 255, 255, 0.04) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+        border-radius: var(--r-card) !important;
+        box-shadow:
+            0 2px 16px rgba(0, 0, 0, 0.15),
+            inset 0 1px 0 rgba(255, 255, 255, 0.16) !important;
+    }
+
+    [class*="searchBar"],
+    [class*="search"] > [class*="input"] {
+        -apple-visual-effect: -apple-system-blur-material-thin !important;
+        backdrop-filter: none !important;
+        background: transparent !important;
+        border-top:    1px solid rgba(255, 255, 255, 0.20) !important;
+        border-left:   1px solid rgba(255, 255, 255, 0.14) !important;
+        border-right:  1px solid rgba(255, 255, 255, 0.05) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+        border-radius: 12px !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+    }
+
+    /* Prevent stacked glass cards inside menus/popouts */
+    [class*="menu"] [class*="card"],
+    [class*="contextMenu"] [class*="card"],
+    [class*="userPopout"] [class*="card"],
+    [class*="userProfileOuter"] [class*="card"],
+    [class*="popout"] [class*="card"],
+    [class*="popup"] [class*="card"] {
+        -apple-visual-effect: none !important;
+        backdrop-filter: none !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Flatten inner containers inside bottom panels */
+    [class*="panels"] [class*="container"],
+    [class*="panels"] [class*="wrapper"],
+    [class*="panels"] [class*="bar"] {
+        -apple-visual-effect: none !important;
+        backdrop-filter: none !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+}
+
+/* ============================================
+   Cursors — macOS conventions
+   pointer only on interactive, default elsewhere
+   ============================================ */
+
+[class*="button"],
+[class*="channel"],
+[class*="link"],
+[class*="item"],
+[class*="icon"],
+button,
+a,
+[role="button"],
+[role="link"],
+[role="menuitem"],
+[role="option"],
+[class*="clickable"] {
+    cursor: pointer !important;
+}
+
+input,
+textarea,
+[contenteditable],
+[class*="textArea"],
+[class*="editor"] {
+    cursor: text !important;
+}
+
+* {
+    cursor: default !important;
+}
+
+/* ============================================
+   Focus rings — macOS blue
+   ============================================ */
+
+*:focus-visible {
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.5) !important;
+    border-radius: 6px !important;
+}
+
+*:focus {
+    outline: none !important;
+}
+
+/* ============================================
+   Links — no underline by default
+   ============================================ */
+
+a {
+    text-decoration: none !important;
+}
+
+a:hover {
+    text-decoration: underline !important;
+    text-underline-offset: 2px !important;
+    text-decoration-thickness: 1px !important;
+}
+
+[class*="button"] {
+    text-transform: none !important;
+}
+
+/* ============================================
+   Text selection — macOS blue
+   ============================================ */
+
+::selection {
+    background: rgba(0, 122, 255, 0.28) !important;
+    color: inherit !important;
+}
+
+/* ============================================
+   Spacing — 4pt grid
+   ============================================ */
+
+[class*="messageListItem"] {
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+}
+
+[class*="cozyMessage"],
+[class*="message"]:not([class*="compact"]) {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+}
+
+/* ============================================
+   Shape & interaction polish
+   ============================================ */
+
+[class*="menu"] [class*="item"],
+[class*="contextMenu"] [class*="item"] {
+    border-radius: var(--r-item) !important;
+    margin: 1px 0 !important;
+}
+
+[class*="callContainer"],
+[class*="videoContainer"],
+[class*="tile"] {
+    border-radius: var(--r-panel) !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.30) !important;
+}
+
+[class*="button"]:not([class*="buttonWrapper"]):not([class*="buttonContent"]) {
+    border-radius: var(--r-button) !important;
+}
+
+[class*="button"]:not([class*="buttonWrapper"]):active {
+    transform: scale(0.96) !important;
+}
+
+[class*="channel"],
+[class*="link"],
+[class*="containerDefault"] {
+    border-radius: var(--r-item) !important;
+}
+
+[class*="message"]:hover {
+    background: rgba(255, 255, 255, 0.028) !important;
+    border-radius: 8px !important;
+}
+
+[class*="numberBadge"],
+[class*="badge"],
+[class*="pill"] {
+    border-radius: var(--r-button) !important;
+}
+
+[class*="divider"],
+[class*="separator"] {
+    background: var(--gb-mid) !important;
+}
+
+/* ============================================
+   Scrollbars — thin, native feel
+   ============================================ */
+
+::-webkit-scrollbar       { width: 3px; height: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.20);
+    border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.35);
+}
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* ============================================
+   Transitions
+   ============================================ */
+
+[class*="channel"],
+[class*="item"],
+[class*="link"],
+[class*="button"] {
+    transition: background 0.15s ease, box-shadow 0.15s ease !important;
+}

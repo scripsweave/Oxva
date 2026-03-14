@@ -1,0 +1,234 @@
+/* ============================================
+   macOS Native Feel — Typography & Interaction
+   ============================================ */
+
+/* --- System font at every level --- */
+*,
+input,
+textarea,
+button,
+select {
+    font-family: -apple-system, "SF Pro Text", "SF Pro Display",
+                 BlinkMacSystemFont, sans-serif !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+
+/* --- Code blocks use SF Mono --- */
+code, pre,
+[class*="inline"],
+[class*="codeBlock"],
+[class*="markup"] code {
+    font-family: "SF Mono", ui-monospace, "Cascadia Code",
+                 "Fira Code", Menlo, monospace !important;
+    font-size: 13px !important;
+    font-feature-settings: "liga" 0 !important;
+}
+
+/* ============================================
+   Typography scale — matches macOS HIG
+   ============================================ */
+
+/* Body text / messages — 15px regular */
+[class*="markup"],
+[class*="messageContent"],
+[class*="content"] p {
+    font-size: 15px !important;
+    line-height: 1.47 !important;
+    font-weight: 400 !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* Usernames in chat — 15px semibold */
+[class*="username"],
+[class*="author"] {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* Timestamps — 12px regular, caption style */
+[class*="timestamp"] {
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    letter-spacing: 0 !important;
+    opacity: 0.45 !important;
+}
+
+/* Channel / DM names in sidebar — 15px medium */
+[class*="channelName"],
+[class*="name_"],
+[class*="children_"] {
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* Section headers (CHANNELS, DIRECT MESSAGES) — 11px semibold */
+[class*="headerText"],
+[class*="containerHeader"],
+[class*="upperContainer"] span {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.06em !important;
+}
+
+/* Server name in top bar — 15px semibold */
+[class*="title"][class*="header"],
+[class*="headerText"] h3 {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* Modal/sheet titles — 20px semibold (Title3) */
+[class*="modal"] [class*="title"],
+[class*="modal"] h1,
+[class*="modal"] h2 {
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.2 !important;
+}
+
+/* Small labels, badges — 12px medium */
+[class*="label"],
+[class*="badge"],
+[class*="tag"] {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0 !important;
+}
+
+/* Button text — 15px medium */
+[class*="button"] [class*="label"],
+[class*="button"] [class*="content"],
+button {
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* Input fields — 15px regular */
+input,
+textarea,
+[class*="input"] {
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* ============================================
+   Cursors — match macOS conventions
+   ============================================ */
+
+[class*="button"],
+[class*="channel"],
+[class*="link"],
+[class*="item"],
+[class*="icon"],
+button,
+a,
+[role="button"],
+[role="link"],
+[role="menuitem"],
+[role="option"],
+[class*="clickable"] {
+    cursor: pointer !important;
+}
+
+input,
+textarea,
+[contenteditable],
+[class*="textArea"],
+[class*="editor"] {
+    cursor: text !important;
+}
+
+* {
+    cursor: default !important;
+}
+
+/* ============================================
+   Focus rings — native macOS style
+   ============================================ */
+
+*:focus-visible {
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.5) !important;
+    border-radius: 6px !important;
+}
+
+/* ============================================
+   Text selection — macOS blue
+   ============================================ */
+
+::selection {
+    background: rgba(0, 122, 255, 0.28) !important;
+    color: inherit !important;
+}
+
+/* ============================================
+   Remove web-y decoration
+   ============================================ */
+
+a {
+    text-decoration: none !important;
+}
+
+a:hover {
+    text-decoration: underline !important;
+    text-underline-offset: 2px !important;
+    text-decoration-thickness: 1px !important;
+}
+
+*:focus {
+    outline: none !important;
+}
+
+[class*="button"] {
+    text-transform: none !important;
+}
+
+/* ============================================
+   Spacing — 4pt grid like macOS HIG
+   ============================================ */
+
+[class*="messageListItem"] {
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+}
+
+[class*="cozyMessage"],
+[class*="message"]:not([class*="compact"]) {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+}
+
+/* ============================================
+   Thin native scrollbars
+   ============================================ */
+
+::-webkit-scrollbar       { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+    background: rgba(128, 128, 128, 0.35);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(128, 128, 128, 0.55);
+}
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* ============================================
+   Smooth transitions on interactive elements
+   ============================================ */
+
+[class*="channel"],
+[class*="item"],
+[class*="link"],
+[class*="button"] {
+    transition: background 0.15s ease, box-shadow 0.15s ease !important;
+}
