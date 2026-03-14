@@ -182,9 +182,8 @@ textarea,
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.20) !important;
 }
 
-/* Interactive input */
-[class*="channelTextArea"],
-[class*="textArea"] {
+/* Interactive input — only the outermost container gets glass */
+[class*="channelTextArea"] {
     backdrop-filter: blur(32px) saturate(180%) brightness(1.10) !important;
     background: var(--glass-specular) !important;
     border-top:    1px solid var(--gb-bright) !important;
@@ -200,18 +199,28 @@ textarea,
         inset 0 -1px 0 rgba(0, 0, 0, 0.15) !important;
 }
 
+/* Reset glass on everything nested inside the input bar
+   so inner textArea/form/button elements don't double-style */
+[class*="channelTextArea"] [class*="textArea"],
+[class*="channelTextArea"] [class*="form"],
+[class*="channelTextArea"] [class*="inner"],
+[class*="channelTextArea"] [class*="attachButton"],
+[class*="channelTextArea"] [class*="buttons"] {
+    backdrop-filter: none !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
 /* Kill Discord's blue focus border on the message input */
 [class*="channelTextArea"]:focus-within,
-[class*="channelTextArea"][class*="focused"],
-[class*="channelTextArea"] [class*="inner"] {
-    border-color: transparent !important;
+[class*="channelTextArea"][class*="focused"] {
+    border-color: var(--gb-mid) !important;
     outline: none !important;
 }
 
 [class*="channelTextArea"] *:focus,
-[class*="channelTextArea"] *:focus-visible,
-[class*="textArea"] *:focus,
-[class*="textArea"] *:focus-visible {
+[class*="channelTextArea"] *:focus-visible {
     outline: none !important;
     box-shadow: none !important;
     border-color: transparent !important;
@@ -422,8 +431,7 @@ input:focus-visible,
         box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
     }
 
-    [class*="channelTextArea"],
-    [class*="textArea"] {
+    [class*="channelTextArea"] {
         -apple-visual-effect: -apple-system-glass-material !important;
         backdrop-filter: none !important;
         background: transparent !important;
@@ -436,6 +444,18 @@ input:focus-visible,
             var(--glass-shadow),
             inset 0 1px 0 rgba(255, 255, 255, 0.26),
             inset 0 -1px 0 rgba(0, 0, 0, 0.10) !important;
+    }
+
+    [class*="channelTextArea"] [class*="textArea"],
+    [class*="channelTextArea"] [class*="form"],
+    [class*="channelTextArea"] [class*="inner"],
+    [class*="channelTextArea"] [class*="attachButton"],
+    [class*="channelTextArea"] [class*="buttons"] {
+        -apple-visual-effect: none !important;
+        backdrop-filter: none !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
     }
 
     [class*="modal"],
@@ -636,20 +656,7 @@ a:hover {
     color: inherit !important;
 }
 
-/* ============================================
-   Spacing — 4pt grid
-   ============================================ */
-
-[class*="messageListItem"] {
-    padding-top: 2px !important;
-    padding-bottom: 2px !important;
-}
-
-[class*="cozyMessage"],
-[class*="message"]:not([class*="compact"]) {
-    padding-top: 4px !important;
-    padding-bottom: 4px !important;
-}
+/* Message spacing — leave Discord's default alone */
 
 /* ============================================
    Shape & interaction polish
