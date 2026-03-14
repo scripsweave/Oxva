@@ -347,24 +347,32 @@ textarea,
    elements that shouldn't be styled
    ============================================ */
 
-/* Cards inside menus/popouts become individual
-   stacked glass boxes — reset them to transparent */
-[class*="menu"] [class*="card"],
-[class*="contextMenu"] [class*="card"],
+/* Elements nested inside popouts/menus/modals that get
+   accidentally styled as glass panels — flatten them all.
+   Covers card, embed, group, section, container variants. */
 [class*="userPopout"] [class*="card"],
+[class*="userPopout"] [class*="group"],
+[class*="userPopout"] [class*="section"],
+[class*="userPopout"] [class*="container"],
 [class*="userProfileOuter"] [class*="card"],
+[class*="userProfileOuter"] [class*="group"],
+[class*="userProfileOuter"] [class*="section"],
+[class*="userProfileOuter"] [class*="container"],
+[class*="menu"] [class*="card"],
+[class*="menu"] [class*="group"],
+[class*="contextMenu"] [class*="card"],
+[class*="contextMenu"] [class*="group"],
 [class*="popout"] [class*="card"],
-[class*="popup"] [class*="card"] {
+[class*="popout"] [class*="group"],
+[class*="popup"] [class*="card"],
+[class*="popup"] [class*="group"] {
     backdrop-filter: none !important;
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
-    border-radius: var(--r-item) !important;
 }
 
-/* Inner containers inside the bottom panels
-   can pick up background boxes from Discord's
-   own styles; flatten them */
+/* Inner containers inside the bottom panels flatten too */
 [class*="panels"] [class*="container"],
 [class*="panels"] [class*="wrapper"],
 [class*="panels"] [class*="bar"] {
@@ -372,6 +380,19 @@ textarea,
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
+}
+
+/* Suppress Discord's colored focus borders on all inputs,
+   not just channelTextArea */
+input:focus,
+input:focus-visible,
+[class*="inputDefault"]:focus-within,
+[class*="inputWrapper"]:focus-within,
+[class*="input"]:focus,
+[class*="input"]:focus-within {
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
+    outline: none !important;
 }
 
 /* ============================================
