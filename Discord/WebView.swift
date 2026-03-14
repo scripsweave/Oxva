@@ -427,11 +427,11 @@ func loadPluginsAndCSS(webView: WKWebView) {
                        Scale kept low (6) so text above is unaffected. -->
                   <filter id="voxa-glass-panel" x="-5%" y="-5%" width="110%" height="110%"
                           color-interpolation-filters="sRGB">
-                    <feTurbulence type="fractalNoise" baseFrequency="0.008 0.01"
-                                  numOctaves="3" seed="5" result="noise"/>
+                    <feTurbulence type="fractalNoise" baseFrequency="0.008 0.008"
+                                  numOctaves="2" seed="92" result="noise"/>
                     <feGaussianBlur in="noise" stdDeviation="2" result="blurredNoise"/>
                     <feDisplacementMap in="SourceGraphic" in2="blurredNoise"
-                                      scale="6" xChannelSelector="R" yChannelSelector="G"/>
+                                      scale="35" xChannelSelector="R" yChannelSelector="G"/>
                   </filter>
                 </defs>`;
                 document.body.appendChild(svg);
